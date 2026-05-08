@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONO Music — 10 Screens</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg:#0c0c0c;--fg:#f8f8f6;--fg2:#888;--fg3:#3a3a3a;--fg4:#2a2a2a;
+            --accent:#e8ff47;--accent-rgb:232,255,71;
+            --rose:#ff4d6a;--rose-rgb:255,77,106;
+            --blue:#4d9fff;--blue-rgb:77,159,255;
+            --serif:'Playfair Display',Georgia,serif;
+            --sans:'Inter',-apple-system,sans-serif;
+        }
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:var(--sans);-webkit-font-smoothing:antialiased;background:#111;color:var(--fg);padding:48px 24px;min-height:100vh}
+
+        h1.page-title{font-family:var(--serif);font-size:48px;font-weight:900;letter-spacing:-.04em;text-align:center;margin-bottom:8px}
+        h1.page-title em{font-style:italic;color:var(--accent)}
+        .page-sub{text-align:center;font-size:14px;color:var(--fg2);margin-bottom:48px;font-weight:300}
+
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:40px;max-width:1800px;margin:0 auto;justify-items:center}
+
+        .screen-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+        .screen-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);font-weight:500}
+
+        .phone{width:390px;height:844px;border-radius:54px;position:relative;overflow:hidden;background:var(--bg);box-shadow:0 30px 60px rgba(0,0,0,.5),inset 0 0 0 .5px rgba(255,255,255,.04)}
+        .di{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:126px;height:36px;background:#000;border-radius:20px;z-index:10}
+        .hb{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.15);z-index:10}
+        .sb{position:absolute;top:16px;left:30px;right:30px;display:flex;justify-content:space-between;font-size:13px;font-weight:600;z-index:10;color:var(--fg)}
+
+        /* Common components */
+        .tab-b{position:absolute;bottom:0;left:0;right:0;height:68px;background:rgba(12,12,12,.95);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:space-around;padding:0 16px 6px;border-top:.5px solid rgba(255,255,255,.04)}
+        .tab-b .t{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;font-weight:500;color:var(--fg3);letter-spacing:.03em;text-transform:uppercase}
+        .tab-b .t.on{color:var(--accent)}
+        .tab-b .t svg{width:18px;height:18px}
+
+        .screen-content{position:absolute;inset:0;padding:62px 24px 80px;overflow:hidden;display:flex;flex-direction:column}
+
+        /* ===== Screen 1: Splash ===== */
+        .s1{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:0;background:var(--bg)}
+        .s1::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(var(--accent-rgb),.08) 0%,transparent 50%)}
+        .s1-logo{font-family:var(--serif);font-size:42px;font-weight:900;letter-spacing:-.04em;position:relative;z-index:1}
+        .s1-logo em{font-style:italic;color:var(--accent)}
+        .s1-tagline{font-size:12px;color:var(--fg3);letter-spacing:.15em;text-transform:uppercase;margin-top:12px;position:relative;z-index:1}
+
+        /* ===== Screen 2: Onboarding ===== */
+        .s2{padding:62px 28px 40px;display:flex;flex-direction:column;justify-content:flex-end}
+        .s2::before{content:'';position:absolute;top:60px;left:0;right:0;height:55%;background:linear-gradient(180deg,rgba(var(--accent-rgb),.04) 0%,transparent 100%);border-radius:0 0 40% 40%}
+        .s2-art{position:absolute;top:100px;left:50%;transform:translateX(-50%);width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#1a1a2e,#2d1b69 50%,#44318d);box-shadow:0 20px 60px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+        .s2-art::after{content:'';position:absolute;width:240px;height:240px;border-radius:50%;border:1px solid rgba(var(--accent-rgb),.1)}
+        .s2-art svg{width:48px;height:48px;color:var(--accent)}
+        .s2 h2{font-family:var(--serif);font-size:36px;font-weight:700;line-height:1.1;letter-spacing:-.03em;margin-bottom:12px;margin-top:auto}
+        .s2 h2 em{font-style:italic;color:var(--accent)}
+        .s2 p{font-size:14px;color:var(--fg2);line-height:1.6;margin-bottom:28px;font-weight:300}
+        .s2-btn{width:100%;padding:17px;border-radius:50px;border:none;font-family:var(--sans);font-size:15px;font-weight:600;background:var(--accent);color:#0c0c0c;cursor:pointer}
+        .s2-dots{display:flex;gap:6px;justify-content:center;margin-top:20px}
+        .s2-dots span{width:6px;height:6px;border-radius:50%;background:var(--fg3)}
+        .s2-dots span.on{width:20px;border-radius:3px;background:var(--accent)}
+
+        /* ===== Screen 3: Home/Feed ===== */
+        .s3{padding:62px 0 80px}
+        .s3-head{padding:0 24px;margin-bottom:24px}
+        .s3-head .greeting{font-size:12px;color:var(--fg2);margin-bottom:4px;font-weight:300}
+        .s3-head h2{font-family:var(--serif);font-size:28px;font-weight:700;letter-spacing:-.02em}
+        .s3-head h2 em{font-style:italic;color:var(--accent)}
+        .s3-cards{display:flex;gap:12px;padding:0 24px;margin-bottom:24px;overflow:hidden}
+        .s3-card{width:140px;height:180px;border-radius:16px;flex-shrink:0;position:relative;overflow:hidden}
+        .s3-card-bg{width:100%;height:100%}
+        .c1{background:linear-gradient(160deg,#2a1b3d,#6a3093)}
+        .c2{background:linear-gradient(160deg,#1b3d2a,#2d8659)}
+        .c3{background:linear-gradient(160deg,#3d2a1b,#b85c38)}
+        .s3-card-info{position:absolute;bottom:12px;left:12px;right:12px}
+        .s3-card-info h5{font-size:12px;font-weight:600;margin-bottom:2px}
+        .s3-card-info p{font-size:10px;color:rgba(255,255,255,.6);font-weight:300}
+        .s3-section{padding:0 24px}
+        .s3-sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+        .s3-sec-head h4{font-size:14px;font-weight:600;letter-spacing:-.01em}
+        .s3-sec-head span{font-size:11px;color:var(--accent);font-weight:500}
+        .s3-track{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:.5px solid var(--fg4)}
+        .s3-track-n{font-family:var(--serif);font-size:13px;color:var(--fg3);width:18px;font-style:italic}
+        .s3-track-cv{width:44px;height:44px;border-radius:8px;flex-shrink:0}
+        .s3-track-info h5{font-size:13px;font-weight:500}
+        .s3-track-info p{font-size:10px;color:var(--fg2);margin-top:1px;font-weight:300}
+        .s3-track-dur{font-size:10px;color:var(--fg3);margin-left:auto;font-variant-numeric:tabular-nums}
+
+        /* ===== Screen 4: Search ===== */
+        .s4{padding:62px 24px 80px}
+        .s4 h2{font-family:var(--serif);font-size:32px;font-weight:900;letter-spacing:-.03em;margin-bottom:20px}
+        .s4-search{display:flex;align-items:center;gap:10px;background:var(--fg4);border-radius:14px;padding:13px 16px;margin-bottom:24px}
+        .s4-search svg{width:16px;height:16px;color:var(--fg2);flex-shrink:0}
+        .s4-search span{font-size:14px;color:var(--fg3);font-weight:300}
+        .s4-genres{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        .s4-genre{height:80px;border-radius:14px;display:flex;align-items:flex-end;padding:14px;font-size:13px;font-weight:600;position:relative;overflow:hidden}
+        .s4-genre::after{content:'';position:absolute;top:-20px;right:-20px;width:60px;height:60px;border-radius:50%;opacity:.2}
+        .g1{background:#1c1c3d}.g1::after{background:#6366f1}
+        .g2{background:#1c3d1c}.g2::after{background:#10b981}
+        .g3{background:#3d1c1c}.g3::after{background:#ef4444}
+        .g4{background:#3d3d1c}.g4::after{background:#f59e0b}
+        .g5{background:#1c2d3d}.g5::after{background:#3b82f6}
+        .g6{background:#2d1c3d}.g6::after{background:#8b5cf6}
+
+        /* ===== Screen 5: Now Playing (Full Art) ===== */
+        .s5{padding:0;display:flex;flex-direction:column}
+        .s5-art{flex:1;position:relative;background:linear-gradient(135deg,#1a1a2e 0%,#44318d 50%,#6a3093 100%)}
+        .s5-art::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,12,12,.3) 0%,transparent 30%,transparent 50%,rgba(12,12,12,.9) 100%)}
+        .s5-nav{position:absolute;top:60px;left:24px;right:24px;display:flex;justify-content:space-between;z-index:2}
+        .s5-nav .ib{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#fff}
+        .s5-nav .ib svg{width:16px;height:16px}
+        .s5-bottom{position:absolute;bottom:0;left:0;right:0;padding:0 28px 40px;z-index:2}
+        .s5-bottom h2{font-family:var(--serif);font-size:26px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+        .s5-bottom p{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:20px;font-weight:300}
+        .s5-bar{height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin-bottom:16px;overflow:hidden}
+        .s5-bar-fill{height:100%;width:42%;background:var(--accent);border-radius:2px}
+        .s5-ctrls{display:flex;align-items:center;justify-content:center;gap:32px}
+        .s5-ctrls .sc{color:rgba(255,255,255,.5)}
+        .s5-ctrls .sc svg{width:20px;height:20px}
+        .s5-ctrls .sc-main{width:56px;height:56px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#0c0c0c}
+        .s5-ctrls .sc-main svg{width:22px;height:22px}
+
+        /* ===== Screen 6: Artist Page ===== */
+        .s6{padding:62px 0 80px}
+        .s6-hero{height:200px;position:relative;background:linear-gradient(135deg,#0c2340,#1a5276);margin:0 -24px;display:flex;align-items:flex-end;padding:24px 24px}
+        .s6-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,var(--bg) 100%)}
+        .s6-hero-info{position:relative;z-index:1}
+        .s6-hero-info .verified{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--blue);margin-bottom:4px}
+        .s6-hero-info .verified svg{width:12px;height:12px}
+        .s6-hero-info h2{font-family:var(--serif);font-size:28px;font-weight:900;letter-spacing:-.02em}
+        .s6-hero-info p{font-size:12px;color:var(--fg2);margin-top:4px;font-weight:300}
+        .s6-actions{display:flex;gap:10px;padding:16px 24px}
+        .s6-btn{padding:10px 24px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:var(--sans)}
+        .s6-btn.primary{background:var(--accent);color:#0c0c0c}
+        .s6-btn.ghost{background:transparent;border:1px solid var(--fg3);color:var(--fg)}
+        .s6-popular{padding:0 24px}
+        .s6-popular h4{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--fg2)}
+
+        /* ===== Screen 7: Playlist ===== */
+        .s7{padding:62px 24px 80px}
+        .s7-cover{width:160px;height:160px;border-radius:16px;margin:0 auto 20px;background:linear-gradient(135deg,#2d1b69,#ec4899);box-shadow:0 16px 40px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+        .s7-cover svg{width:40px;height:40px;color:rgba(255,255,255,.6)}
+        .s7-info{text-align:center;margin-bottom:20px}
+        .s7-info h2{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:4px}
+        .s7-info p{font-size:12px;color:var(--fg2);font-weight:300}
+        .s7-actions{display:flex;justify-content:center;gap:10px;margin-bottom:20px}
+        .s7-play{width:48px;height:48px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#0c0c0c}
+        .s7-play svg{width:20px;height:20px}
+        .s7-shuf{width:48px;height:48px;border-radius:50%;border:1px solid var(--fg3);display:flex;align-items:center;justify-content:center;color:var(--fg2)}
+        .s7-shuf svg{width:18px;height:18px}
+
+        /* ===== Screen 8: Lyrics ===== */
+        .s8{padding:62px 28px 80px;background:linear-gradient(180deg,#1a0a2e 0%,var(--bg) 100%)}
+        .s8-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+        .s8-head span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3)}
+        .s8-head .ib{color:var(--fg2)}
+        .s8-head .ib svg{width:18px;height:18px}
+        .s8-lyrics{flex:1}
+        .s8-line{font-family:var(--serif);font-size:24px;font-weight:400;line-height:1.7;color:var(--fg3);transition:color .3s}
+        .s8-line.active{color:var(--fg)}
+        .s8-line.accent-line{color:var(--accent)}
+        .s8-mini{position:absolute;bottom:80px;left:20px;right:20px;display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.04);border-radius:14px;backdrop-filter:blur(10px)}
+        .s8-mini-cv{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#2d1b69,#6a3093);flex-shrink:0}
+        .s8-mini-info{flex:1}
+        .s8-mini-info h5{font-size:12px;font-weight:500}
+        .s8-mini-info p{font-size:10px;color:var(--fg2);font-weight:300}
+
+        /* ===== Screen 9: Library/Collection ===== */
+        .s9{padding:62px 24px 80px}
+        .s9 h2{font-family:var(--serif);font-size:32px;font-weight:900;letter-spacing:-.03em;margin-bottom:20px}
+        .s9-filter{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+        .s9-chip{padding:7px 16px;border-radius:50px;font-size:11px;font-weight:500;background:var(--fg4);color:var(--fg2)}
+        .s9-chip.on{background:var(--accent);color:#0c0c0c}
+        .s9-albums{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .s9-album{border-radius:12px;overflow:hidden}
+        .s9-album-cv{width:100%;aspect-ratio:1;position:relative}
+        .a1{background:linear-gradient(135deg,#1a1a3d,#4a3090)}
+        .a2{background:linear-gradient(135deg,#1a3d2a,#2d8659)}
+        .a3{background:linear-gradient(135deg,#3d1a1a,#903030)}
+        .a4{background:linear-gradient(135deg,#1a2d3d,#306090)}
+        .s9-album-cv svg{position:absolute;bottom:10px;right:10px;width:14px;height:14px;color:rgba(255,255,255,.4)}
+        .s9-album-info{padding:10px 4px}
+        .s9-album-info h5{font-size:12px;font-weight:600;margin-bottom:2px}
+        .s9-album-info p{font-size:10px;color:var(--fg2);font-weight:300}
+
+        /* ===== Screen 10: Settings/Profile ===== */
+        .s10{padding:62px 24px 80px}
+        .s10-profile{display:flex;align-items:center;gap:14px;margin-bottom:28px;padding-bottom:20px;border-bottom:.5px solid var(--fg4)}
+        .s10-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a0e547);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:22px;font-weight:700;color:#0c0c0c}
+        .s10-info h3{font-size:16px;font-weight:600;margin-bottom:2px}
+        .s10-info p{font-size:12px;color:var(--fg2);font-weight:300}
+        .s10-section{margin-bottom:20px}
+        .s10-section h4{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3);margin-bottom:10px;font-weight:500}
+        .s10-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:.5px solid var(--fg4)}
+        .s10-item svg{width:18px;height:18px;color:var(--fg2)}
+        .s10-item span{flex:1;font-size:14px;font-weight:400}
+        .s10-item .arr{font-size:14px;color:var(--fg3)}
+        .s10-item .arr svg{width:14px;height:14px}
+        .s10-toggle{width:40px;height:22px;border-radius:11px;background:var(--accent);position:relative}
+        .s10-toggle::after{content:'';position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:50%;background:#0c0c0c}
+    </style>
+</head>
+<body>
+    <h1 class="page-title">MONO<em>.</em></h1>
+    <p class="page-sub">Music App — 10 Screen Design System</p>
+
+    <div class="grid">
+
+        <!-- 1: Splash -->
+        <div class="screen-wrap">
+            <span class="screen-label">01 · Splash</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s1">
+                    <div class="s1-logo">MONO<em>.</em></div>
+                    <p class="s1-tagline">Your sound, refined</p>
+                </div>
+            <div class="hb"></div></div>
+        </div>
+
+        <!-- 2: Onboarding -->
+        <div class="screen-wrap">
+            <span class="screen-label">02 · Onboarding</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s2">
+                    <div class="s2-art"><i data-lucide="headphones"></i></div>
+                    <h2>Listen<br>in <em>focus.</em></h2>
+                    <p>No algorithm noise. Just your taste, curated and refined over time.</p>
+                    <button class="s2-btn">Get Started</button>
+                    <div class="s2-dots"><span class="on"></span><span></span><span></span></div>
+                </div>
+            <div class="hb"></div></div>
+        </div>
+
+        <!-- 3: Home -->
+        <div class="screen-wrap">
+            <span class="screen-label">03 · Home</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s3">
+                    <div class="s3-head">
+                        <p class="greeting">Good evening</p>
+                        <h2>Made for <em>you</em></h2>
+                    </div>
+                    <div class="s3-cards">
+                        <div class="s3-card"><div class="s3-card-bg c1"></div><div class="s3-card-info"><h5>Late Night</h5><p>12 tracks</p></div></div>
+                        <div class="s3-card"><div class="s3-card-bg c2"></div><div class="s3-card-info"><h5>Morning Run</h5><p>8 tracks</p></div></div>
+                        <div class="s3-card"><div class="s3-card-bg c3"></div><div class="s3-card-info"><h5>Deep Focus</h5><p>20 tracks</p></div></div>
+                    </div>
+                    <div class="s3-section">
+                        <div class="s3-sec-head"><h4>Recently played</h4><span>See all</span></div>
+                        <div class="s3-track"><span class="s3-track-n">1</span><div class="s3-track-cv cv1"></div><div class="s3-track-info"><h5>After Hours</h5><p>The Weeknd</p></div><span class="s3-track-dur">4:01</span></div>
+                        <div class="s3-track"><span class="s3-track-n">2</span><div class="s3-track-cv cv2"></div><div class="s3-track-info"><h5>Levitating</h5><p>Dua Lipa</p></div><span class="s3-track-dur">3:23</span></div>
+                        <div class="s3-track"><span class="s3-track-n">3</span><div class="s3-track-cv cv3"></div><div class="s3-track-info"><h5>Flowers</h5><p>Miley Cyrus</p></div><span class="s3-track-dur">3:20</span></div>
+                    </div>
+                </div>
+                <div class="tab-b"><div class="t on"><i data-lucide="home"></i>Home</div><div class="t"><i data-lucide="search"></i>Search</div><div class="t"><i data-lucide="library"></i>Library</div></div>
+            <div class="hb"></div></div>
+        </div>
+
+        <!-- 4: Search -->
+        <div class="screen-wrap">
+            <span class="screen-label">04 · Search</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s4">
+                    <h2>Search</h2>
+                    <div class="s4-search"><i data-lucide="search"></i><span>Artists, songs, podcasts...</span></div>
+                    <div class="s4-genres">
+                        <div class="s4-genre g1">Electronic</div>
+                        <div class="s4-genre g2">Indie</div>
+                        <div class="s4-genre g3">Hip-Hop</div>
+                        <div class="s4-genre g4">Jazz</div>
+                        <div class="s4-genre g5">Classical</div>
+                        <div class="s4-genre g6">R&B</div>
+                    </div>
+                </div>
+                <div class="tab-b"><div class="t"><i data-lucide="home"></i>Home</div><div class="t on"><i data-lucide="search"></i>Search</div><div class="t"><i data-lucide="library"></i>Library</div></div>
+            <div class="hb"></div></div>
+        </div>
+
+        <!-- 5: Now Playing -->
+        <div class="screen-wrap">
+            <span class="screen-label">05 · Now Playing</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s5" style="padding:0">
+                    <div class="s5-art">
+                        <div class="s5-nav"><div class="ib"><i data-lucide="chevron-down"></i></div><div class="ib"><i data-lucide="more-horizontal"></i></div></div>
+                        <div class="s5-bottom">
+                            <h2>After Hours</h2>
+                            <p>The Weeknd · 2020</p>
+                            <div class="s5-bar"><div class="s5-bar-fill"></div></div>
+                            <div class="s5-ctrls">
+                                <div class="sc"><i data-lucide="shuffle"></i></div>
+                                <div class="sc"><i data-lucide="skip-back"></i></div>
+                                <div class="sc-main"><i data-lucide="pause"></i></div>
+                                <div class="sc"><i data-lucide="skip-forward"></i></div>
+                                <div class="sc"><i data-lucide="repeat"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="hb"></div></div>
+        </div>
+
+        <!-- 6: Artist -->
+        <div class="screen-wrap">
+            <span class="screen-label">06 · Artist</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s6" style="padding-left:0;padding-right:0">
+                    <div class="s6-hero">
+                        <div class="s6-hero-info">
+                            <span class="verified"><i data-lucide="badge-check"></i> Verified Artist</span>
+                            <h2>The Weeknd</h2>
+                            <p>52.4M monthly listeners</p>
+                        </div>
+                    </div>
+                    <div class="s6-actions">
+                        <button class="s6-btn primary">Play</button>
+                        <button class="s6-btn ghost">Follow</button>
+                    </div>
+                    <div class="s6-popular">
+                        <h4>Popular</h4>
+                        <div class="s3-track"><span class="s3-track-n">1</span><div class="s3-track-cv cv1"></div><div class="s3-track-info"><h5>Blinding Lights</h5><p>3.2B plays</p></div><span class="s3-track-dur">3:20</span></div>
+                        <div class="s3-track"><span class="s3-track-n">2</span><div class="s3-track-cv cv2"></div><div class="s3-track-info"><h5>Save Your Tears</h5><p>2.1B plays</p></div><span class="s3-track-dur">3:35</span></div>
+                        <div class="s3-track"><span class="s3-track-n">3</span><div class="s3-track-cv cv3"></div><div class="s3-track-info"><h5>Starboy</h5><p>2.8B plays</p></div><span class="s3-track-dur">3:50</span></div>
+                    </div>
+                </div>
+                <div class="tab-b"><div class="t"><i data-lucide="home"></i>Home</div><div class="t"><i data-lucide="search"></i>Search</div><div class="t on"><i data-lucide="library"></i>Library</div></div>
+            <div class="hb"></div></div>
+        </div>
+
+        <!-- 7: Playlist -->
+        <div class="screen-wrap">
+            <span class="screen-label">07 · Playlist</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s7">
+                    <div class="s7-cover"><i data-lucide="music"></i></div>
+                    <div class="s7-info"><h2>Night Vibes</h2><p>24 songs · 1h 42m</p></div>
+                    <div class="s7-actions"><div class="s7-shuf"><i data-lucide="shuffle"></i></div><div class="s7-play"><i data-lucide="play"></i></div><div class="s7-shuf"><i data-lucide="heart"></i></div></div>
+                    <div class="s3-track"><span class="s3-track-n">1</span><div class="s3-track-cv cv1"></div><div class="s3-track-info"><h5>After Hours</h5><p>The Weeknd</p></div><span class="s3-track-dur">4:01</span></div>
+                    <div class="s3-track"><span class="s3-track-n">2</span><div class="s3-track-cv cv4"></div><div class="s3-track-info"><h5>Ocean Drive</h5><p>Duke Dumont</p></div><span class="s3-track-dur">5:12</span></div>
+                    <div class="s3-track"><span class="s3-track-n">3</span><div class="s3-track-cv cv5"></div><div class="s3-track-info"><h5>Midnight City</h5><p>M83</p></div><span class="s3-track-dur">4:03</span></div>
+                </div>
+                <div class="tab-b"><div class="t"><i data-lucide="home"></i>Home</div><div class="t"><i data-lucide="search"></i>Search</div><div class="t on"><i data-lucide="library"></i>Library</div></div>
+            <div class="hb"></div></div>
+        </div>
+
+        <!-- 8: Lyrics -->
+        <div class="screen-wrap">
+            <span class="screen-label">08 · Lyrics</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s8">
+                    <div class="s8-head"><span>Lyrics</span><div class="ib"><i data-lucide="maximize-2"></i></div></div>
+                    <div class="s8-lyrics">
+                        <p class="s8-line">I broke your heart</p>
+                        <p class="s8-line active">like someone broke mine</p>
+                        <p class="s8-line accent-line">And now you won't love</p>
+                        <p class="s8-line">I try to find one in</p>
+                        <p class="s8-line">this city of lost angels</p>
+                        <p class="s8-line">Talk to me baby</p>
+                        <p class="s8-line">tell me what you want</p>
+                    </div>
+                    <div class="s8-mini"><div class="s8-mini-cv"></div><div class="s8-mini-info"><h5>After Hours</h5><p>The Weeknd</p></div></div>
+                </div>
+            <div class="hb"></div></div>
+        </div>
+
+        <!-- 9: Library -->
+        <div class="screen-wrap">
+            <span class="screen-label">09 · Library</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s9">
+                    <h2>Library</h2>
+                    <div class="s9-filter">
+                        <span class="s9-chip on">All</span>
+                        <span class="s9-chip">Albums</span>
+                        <span class="s9-chip">Playlists</span>
+                        <span class="s9-chip">Liked</span>
+                    </div>
+                    <div class="s9-albums">
+                        <div class="s9-album"><div class="s9-album-cv a1"><i data-lucide="play-circle"></i></div><div class="s9-album-info"><h5>Dawn FM</h5><p>The Weeknd</p></div></div>
+                        <div class="s9-album"><div class="s9-album-cv a2"><i data-lucide="play-circle"></i></div><div class="s9-album-info"><h5>Future Nostalgia</h5><p>Dua Lipa</p></div></div>
+                        <div class="s9-album"><div class="s9-album-cv a3"><i data-lucide="play-circle"></i></div><div class="s9-album-info"><h5>Endless Summer</h5><p>Various</p></div></div>
+                        <div class="s9-album"><div class="s9-album-cv a4"><i data-lucide="play-circle"></i></div><div class="s9-album-info"><h5>Hurry Up Tomorrow</h5><p>The Weeknd</p></div></div>
+                    </div>
+                </div>
+                <div class="tab-b"><div class="t"><i data-lucide="home"></i>Home</div><div class="t"><i data-lucide="search"></i>Search</div><div class="t on"><i data-lucide="library"></i>Library</div></div>
+            <div class="hb"></div></div>
+        </div>
+
+        <!-- 10: Settings -->
+        <div class="screen-wrap">
+            <span class="screen-label">10 · Profile</span>
+            <div class="phone"><div class="di"></div>
+                <div class="screen-content s10">
+                    <div class="s10-profile">
+                        <div class="s10-avatar">M</div>
+                        <div class="s10-info"><h3>MLiang</h3><p>Premium · Since 2024</p></div>
+                    </div>
+                    <div class="s10-section">
+                        <h4>Preferences</h4>
+                        <div class="s10-item"><i data-lucide="moon"></i><span>Dark Mode</span><div class="s10-toggle"></div></div>
+                        <div class="s10-item"><i data-lucide="volume-2"></i><span>Audio Quality</span><span class="arr"><i data-lucide="chevron-right"></i></span></div>
+                        <div class="s10-item"><i data-lucide="download"></i><span>Downloads</span><span class="arr"><i data-lucide="chevron-right"></i></span></div>
+                    </div>
+                    <div class="s10-section">
+                        <h4>Account</h4>
+                        <div class="s10-item"><i data-lucide="credit-card"></i><span>Subscription</span><span class="arr"><i data-lucide="chevron-right"></i></span></div>
+                        <div class="s10-item"><i data-lucide="shield"></i><span>Privacy</span><span class="arr"><i data-lucide="chevron-right"></i></span></div>
+                        <div class="s10-item"><i data-lucide="log-out"></i><span>Log Out</span><span class="arr"><i data-lucide="chevron-right"></i></span></div>
+                    </div>
+                </div>
+                <div class="tab-b"><div class="t"><i data-lucide="home"></i>Home</div><div class="t"><i data-lucide="search"></i>Search</div><div class="t on"><i data-lucide="library"></i>Library</div></div>
+            <div class="hb"></div></div>
+        </div>
+
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
