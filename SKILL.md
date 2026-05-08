@@ -305,7 +305,84 @@ The #1 difference between amateur and professional UI: **extreme typographic con
 
 ---
 
-### 6. Color Tokens
+### 6. Icons: SVG Only — NEVER Emoji
+
+**ABSOLUTE RULE: Never use emoji (🎬🎮💼🎵) as UI icons. This is the #1 sign of AI-generated amateur code.**
+
+**Option A: Lucide Icons via CDN (PREFERRED)**
+
+Lucide is the most modern, lightweight, open-source icon library (1000+ icons).
+
+```html
+<!-- Add to <head> -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- Use in HTML with data-lucide attribute -->
+<i data-lucide="music" class="icon"></i>
+<i data-lucide="play" class="icon"></i>
+<i data-lucide="search" class="icon"></i>
+<i data-lucide="heart" class="icon"></i>
+
+<!-- Initialize at end of body -->
+<script>lucide.createIcons();</script>
+```
+
+```css
+/* Style icons with CSS */
+.icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 1.75;
+}
+```
+
+Common icon names: `home`, `search`, `settings`, `user`, `heart`, `play`, `pause`, `skip-forward`, `skip-back`, `volume-2`, `music`, `headphones`, `mic`, `star`, `bookmark`, `share-2`, `download`, `arrow-left`, `arrow-right`, `chevron-down`, `plus`, `x`, `check`, `bell`, `mail`, `calendar`, `clock`, `globe`, `camera`, `image`, `film`, `book-open`, `briefcase`, `code`, `terminal`, `zap`, `trending-up`, `bar-chart-2`, `pie-chart`, `layers`, `grid`, `list`, `filter`, `edit-3`, `trash-2`, `eye`, `eye-off`, `lock`, `unlock`, `sun`, `moon`, `menu`, `more-horizontal`, `more-vertical`, `external-link`, `link`, `send`, `message-circle`, `phone`, `map-pin`
+
+**Option B: Inline SVG (when CDN is not available)**
+
+Write minimal SVG paths directly. Keep icons simple (single path, 24x24 viewBox):
+
+```html
+<!-- Play icon -->
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <polygon points="5 3 19 12 5 21 5 3"/>
+</svg>
+
+<!-- Search icon -->
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+</svg>
+
+<!-- Home icon -->
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+</svg>
+```
+
+**Icon styling rules:**
+- Size: 18-24px for standard, 16px for compact, 28-32px for feature icons
+- Stroke-width: 1.5-2 (thinner = more refined)
+- Color: use `currentColor` so icons inherit text color
+- Icon container: wrap in a rounded div with subtle background for emphasis
+
+```css
+/* Icon container — gives icons a "home" */
+.icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(var(--accent-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+```
+
+---
+
+### 7. Color Tokens
 
 ```css
 :root {
@@ -462,7 +539,7 @@ Add these to create the "designed" feel:
 | `box-shadow: 0 2px 4px` | Weak, flat | Deep layered shadows |
 | Text max-width: 100% | Unreadable lines | max-width: 540-600px |
 | `transition: 0.3s ease` | AI-generated tell | Custom bezier curves |
-| Emoji as icons 🎯 | Unprofessional | CSS shapes or SVG |
+| Emoji as icons 🎬🎮💼 | #1 AI tell, amateur | Lucide SVG icons via CDN or inline SVG |
 | `color: #fff` on dark bg | Harsh, eye strain | Use #f0f0f3 or #e8e8ec |
 
 ---
@@ -505,6 +582,8 @@ Special: [orbs / noise / grid-bg / animated borders]
 - [ ] Cards have top-edge highlight effect
 - [ ] Mobile breakpoint handled
 - [ ] Content doesn't touch screen edges
+- [ ] ZERO emoji used as icons (all SVG/Lucide)
+- [ ] Icons use consistent stroke-width (1.5-2)
 
 ---
 
