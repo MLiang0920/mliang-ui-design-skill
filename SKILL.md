@@ -1,355 +1,521 @@
 ---
 name: web-ui-codegen
-description: "High-quality Web UI code generator that outputs professional, visually polished HTML/CSS/JS, React, or Vue code. Solves the common problem of AI-generated UI looking ugly — enforces Apple-style minimalist design by default with proper color harmony, spacing rhythm, typography scale, and modern effects. Outputs both runnable code and a design specification. This skill should be used when the user asks to build, create, design, or implement any web page, web app, landing page, dashboard, admin panel, or UI component, and expects visually beautiful results. Pairs with ui-ux-pro-max for design intelligence lookup."
+description: "High-quality Web UI code generator that outputs professional, visually polished HTML/CSS/JS, React, or Vue code. Solves the common problem of AI-generated UI looking ugly — enforces modern diffused gradient design, bento grid layouts, glassmorphism, cinematic typography, and rich visual depth. Outputs both runnable code and a design specification. This skill should be used when the user asks to build, create, design, or implement any web page, web app, landing page, dashboard, admin panel, or UI component, and expects visually beautiful results. Pairs with ui-ux-pro-max for design intelligence lookup."
 agent_created: true
 ---
 
-# Web UI Codegen — Beautiful UI Code Generator
+# Web UI Codegen — Premium UI Code Generator
 
-Generate professional, visually polished Web UI code that looks like it was designed by a top-tier product designer at Apple or Vercel — NOT generic AI output.
+Generate UI code that looks like a Dribbble top-shot or Behance featured project — NOT generic AI output. The goal is to produce code indistinguishable from a senior product designer's work at top studios.
 
 ## Core Problem This Skill Solves
 
-Most AI agents produce UI that suffers from:
-- Flat, lifeless gray backgrounds with no depth
-- No glassmorphism, no gradients, no modern effects
-- Tiny border-radius that looks like 2015 Bootstrap
-- Zero micro-interactions or state animations
-- No sense of "premium" or "elevated" design
+AI-generated UI typically looks "technically correct but soulless":
+- Flat, lifeless layouts with no visual emotion
+- Mechanical grid without rhythm or breathing room
+- Generic colors that don't create atmosphere
+- No depth, no light, no dimension
+- Text that just "sits there" without commanding attention
 
-This skill enforces **premium visual quality** inspired by modern iOS/macOS design language, Dribbble-top-shots, and high-end SaaS products.
+This skill transforms output into **design-grade visual experiences**.
 
 ## When to Use
 
 This skill MUST be invoked when:
-- Building any web page or web app from scratch
-- Creating UI components that need to look polished
-- User says "make it beautiful" or "design-quality UI"
-- User complains about AI-generated UI looking bad
-- Any task requiring HTML/CSS/JS, React, or Vue output with visual quality expectations
+- Building any web page, app, or landing page
+- Creating UI components that need polish
+- User expects beautiful, modern design output
+- Any HTML/CSS/JS, React, or Vue task with visual quality expectations
 
-## Default Design Philosophy — Premium Dark Glassmorphism
+---
 
-The DEFAULT style is **dark, premium, glassmorphic** — inspired by modern iOS widgets, Apple Vision Pro UI, and high-end design tools. This creates immediate visual impact.
+## THE DESIGN SYSTEM
 
-### Core Visual DNA:
+### 1. Background: Diffused Gradient Atmosphere
 
-1. **Dark gradient backgrounds** — Never flat gray. Use subtle multi-stop gradients (e.g., `#0a0a0f` → `#1a1a2e` → `#16213e`)
-2. **Glassmorphism cards** — `backdrop-filter: blur(20-40px)` + semi-transparent backgrounds + subtle light borders
-3. **Extra-large border radius** — 20-28px for cards, 14-18px for buttons, 40-50px for pill/capsule shapes
-4. **Subtle inner glow** — Cards have a faint `box-shadow: inset 0 1px 0 rgba(255,255,255,0.05)` top-light effect
-5. **Monochrome + one accent** — Neutral grays/whites for structure, ONE vibrant accent for key actions
-6. **Smooth, springy animations** — `cubic-bezier(0.34, 1.56, 0.64, 1)` for bouncy interactions
-7. **Depth via layering** — Multiple z-levels visible (background → mid-layer → foreground cards)
-8. **Premium typography** — Large, bold headings with tight letter-spacing; thin, light body text
+NEVER use flat solid colors. Backgrounds must create **atmosphere and emotion**.
 
-## Mandatory Pre-Generation Checklist
-
-Before writing ANY UI code, complete these steps:
-
-### Step 1: Determine Design Tokens
+**Technique — Layered Diffused Gradients:**
 
 ```css
+/* Background layer 1: base gradient */
+body {
+  background: #0a0a0f;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(255, 107, 107, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(78, 205, 196, 0.06) 0%, transparent 50%);
+}
+
+/* Light theme version: */
+body.light {
+  background: #f8f6f4;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(167, 139, 250, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 60%, rgba(251, 191, 146, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse 50% 50% at 10% 90%, rgba(147, 197, 253, 0.08) 0%, transparent 40%);
+}
+```
+
+**Rules:**
+- Use 2-4 `radial-gradient` layers with different positions and colors
+- Keep opacity LOW (0.06-0.15 on dark, 0.08-0.15 on light)
+- Colors should be complementary or analogous — NOT random
+- Position gradients off-center and at edges for natural feel
+- Use `ellipse` shape, not `circle` — more organic
+
+**Color mood palettes for backgrounds:**
+- **Calm/Tech**: purple-blue + teal (rgba(120,119,198) + rgba(78,205,196))
+- **Warm/Creative**: orange-pink + gold (rgba(255,107,107) + rgba(255,193,68))
+- **Fresh/Nature**: green + blue (rgba(52,211,153) + rgba(96,165,250))
+- **Premium/Luxury**: deep purple + rose (rgba(139,92,246) + rgba(244,114,182))
+- **Neutral/Corporate**: slate-blue + silver (rgba(100,116,139) + rgba(148,163,184))
+
+---
+
+### 2. Typography: Cinematic Hierarchy
+
+The #1 difference between amateur and professional UI: **extreme typographic contrast**.
+
+```css
+/* Hero heading — commands the screen */
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+/* Section heading — anchors content */
+.section-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Subheading / card title */
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* Body text — deliberately light */
+.body-text {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 540px; /* reading measure */
+}
+
+/* Small label / tag */
+.label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+```
+
+**Rules:**
+- Title-to-body size ratio: minimum 3:1 (e.g., 48px title / 16px body)
+- Hero text: ALWAYS use `clamp()` for fluid scaling
+- Letter-spacing: NEGATIVE on headings (-0.02 to -0.04em), POSITIVE on labels (+0.03 to +0.06em)
+- Line-height: 1.0-1.1 for headings, 1.5-1.6 for body
+- Max one screen should have 2-3 font sizes, not more
+- Weight contrast: 700 headings / 400 body — never use 500 for everything
+
+---
+
+### 3. Layout: Breathe & Bento
+
+**The Breathing Rule**: 60% of the screen should be EMPTY SPACE. Content is precious — surround it with air.
+
+**Spacing scale:**
+```css
 :root {
-  /* === Background System (gradient layers) === */
-  --bg-base: #0a0a0f;
-  --bg-gradient: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
-  --bg-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-
-  /* === Surface System (glassmorphism layers) === */
-  --surface-glass: rgba(255, 255, 255, 0.04);
-  --surface-glass-hover: rgba(255, 255, 255, 0.08);
-  --surface-glass-active: rgba(255, 255, 255, 0.12);
-  --surface-elevated: rgba(255, 255, 255, 0.06);
-  --surface-border: rgba(255, 255, 255, 0.08);
-  --surface-border-hover: rgba(255, 255, 255, 0.15);
-  --surface-inner-glow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-
-  /* === Text System === */
-  --text-primary: #F5F5F7;
-  --text-secondary: #A1A1A6;
-  --text-muted: #636366;
-  --text-accent: var(--accent);
-
-  /* === Accent (choose ONE per project) === */
-  --accent: #007AFF;           /* iOS blue — default */
-  --accent-glow: rgba(0, 122, 255, 0.3);
-  --accent-soft: rgba(0, 122, 255, 0.12);
-  /* Alternatives: #AF52DE (purple), #30D158 (green), #FF9F0A (orange), #FF375F (pink) */
-
-  /* === Spacing (4px base) === */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
-  --space-3xl: 64px;
-  --space-4xl: 96px;
-
-  /* === Typography === */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 2rem;
-  --text-4xl: 2.5rem;
-  --text-5xl: 3.5rem;
-
-  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
-
-  /* === Border Radius (LARGE — premium feel) === */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-  --radius-2xl: 36px;
-  --radius-pill: 50px;
-  --radius-full: 9999px;
-
-  /* === Shadows (dark-mode optimized) === */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 20px var(--accent-glow);
-
-  /* === Transitions === */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  --duration-fast: 150ms;
-  --duration-base: 250ms;
-  --duration-slow: 400ms;
-
-  /* === Blur amounts === */
-  --blur-sm: 10px;
-  --blur-md: 20px;
-  --blur-lg: 40px;
-  --blur-xl: 60px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 128px;
+  --space-section: clamp(80px, 12vw, 160px);
 }
 ```
 
-### Step 2: Glass Card Pattern (Core Building Block)
-
-Every card/panel MUST use this pattern:
-
+**Bento Grid (for feature sections, dashboards):**
 ```css
-.glass-card {
-  background: var(--surface-glass);
-  backdrop-filter: blur(var(--blur-md)) saturate(150%);
-  -webkit-backdrop-filter: blur(var(--blur-md)) saturate(150%);
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md), var(--surface-inner-glow);
-  padding: var(--space-lg);
-  transition: all var(--duration-base) var(--ease-out);
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  gap: 16px;
 }
 
-.glass-card:hover {
-  background: var(--surface-glass-hover);
-  border-color: var(--surface-border-hover);
-  box-shadow: var(--shadow-lg), var(--surface-inner-glow);
-  transform: translateY(-2px);
+/* Feature card spans 2 cols */
+.bento-item-wide { grid-column: span 2; }
+/* Hero card spans 2 cols + 2 rows */
+.bento-item-hero { grid-column: span 2; grid-row: span 2; }
+/* Tall card */
+.bento-item-tall { grid-row: span 2; }
+```
+
+**Rules:**
+- Section vertical padding: 80-160px (use `--space-section`)
+- Content max-width: 1120px (not 1200 — slightly tighter feels more designed)
+- Page side padding: 48-80px desktop, 20-24px mobile
+- Card padding: 32-48px (generous, not cramped)
+- Between heading and body text: 16-24px
+- Between sections of cards: 16-20px gap
+- Hero section: content vertically centered, minimum 80vh height
+- NEVER fill the entire width — leave generous margins
+
+---
+
+### 4. Cards & Surfaces: Glass with Soul
+
+```css
+/* === Dark theme glass card === */
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px) saturate(130%);
+  -webkit-backdrop-filter: blur(24px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Top-edge light reflection */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1) 50%, transparent);
+}
+
+/* Hover: lift + glow */
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* === Light theme glass card === */
+.card-light {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.card-light:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 ```
 
-### Step 3: Button Patterns
+**Rules:**
+- Border-radius: 20-32px for cards (LARGE — this is the modern look)
+- Border: always rgba, never solid colors — max 0.06-0.1 opacity
+- Always add top-edge highlight (`::before` linear-gradient trick)
+- Hover must include `translateY` (lift) AND enhanced shadow
+- Light cards use `inset` shadow for inner glow
+- Card padding: minimum 32px, never less
+
+---
+
+### 5. Buttons: Pill + Emotion
 
 ```css
-/* Primary — pill shape with glow */
+/* Primary CTA — pill with presence */
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: 12px 28px;
-  font-size: var(--text-sm);
+  gap: 8px;
+  padding: 14px 32px;
+  font-size: 0.9rem;
   font-weight: 500;
-  color: #FFFFFF;
+  color: #fff;
   background: var(--accent);
   border: none;
-  border-radius: var(--radius-pill);
+  border-radius: 50px;
   cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-bounce);
-  box-shadow: 0 2px 12px var(--accent-glow);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.3);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 4px 20px var(--accent-glow);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.4);
 }
 
 .btn-primary:active {
-  transform: translateY(0) scale(0.97);
+  transform: scale(0.97);
+  transition-duration: 0.1s;
 }
 
-/* Secondary — glass pill */
-.btn-secondary {
+/* Ghost / secondary — subtle outline pill */
+.btn-ghost {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: 12px 28px;
-  font-size: var(--text-sm);
+  gap: 8px;
+  padding: 14px 32px;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-primary);
-  background: var(--surface-glass);
-  backdrop-filter: blur(var(--blur-sm));
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-pill);
+  background: transparent;
+  border: 1px solid rgba(var(--text-rgb), 0.15);
+  border-radius: 50px;
   cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-out);
+  transition: all 0.2s ease;
 }
 
-.btn-secondary:hover {
-  background: var(--surface-glass-hover);
-  border-color: var(--surface-border-hover);
-  transform: translateY(-1px);
-}
-```
-
-### Step 4: Typography Rules
-
-1. **Hero headings**: 48-64px, font-weight 700, letter-spacing -0.03em, line-height 1.05
-2. **Section headings**: 28-36px, font-weight 600, letter-spacing -0.02em
-3. **Body text**: 15-16px, font-weight 400, color: secondary text, line-height 1.6
-4. **Labels/tags**: 12-13px, font-weight 500, letter-spacing +0.03em, uppercase optional
-5. **Contrast**: Primary text = near-white (#F5F5F7), never pure white (#FFF) on dark bg
-
-### Step 5: Layout Rules
-
-1. **Background**: ALWAYS a gradient, never flat solid color
-2. **Content width**: Max 1120px, centered with generous side padding (32-48px)
-3. **Section spacing**: 80-120px vertical between major sections
-4. **Card grid gap**: 16-20px between cards
-5. **Responsive**: grid cols collapse 4→2→1 at 1024/640px breakpoints
-6. **Depth illusion**: Use 2-3 visual layers (bg gradient → floating blur shapes → glass cards)
-
-### Step 6: Elevation & Depth Effects
-
-Add floating gradient orbs/blobs behind content for depth:
-
-```css
-.bg-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.15;
-  pointer-events: none;
-}
-
-.bg-blob-1 {
-  width: 400px; height: 400px;
-  background: #007AFF;
-  top: -100px; left: -100px;
-}
-
-.bg-blob-2 {
-  width: 300px; height: 300px;
-  background: #AF52DE;
-  bottom: -50px; right: -50px;
+.btn-ghost:hover {
+  background: rgba(var(--text-rgb), 0.05);
+  border-color: rgba(var(--text-rgb), 0.3);
 }
 ```
 
-## Anti-Patterns to NEVER Do
+**Rules:**
+- ALL buttons use `border-radius: 50px` (pill shape)
+- Primary button: solid fill + matching color shadow glow
+- Secondary button: transparent/ghost with thin border
+- Padding: 14-16px vertical, 28-36px horizontal (generous)
+- Hover: ALWAYS translateY + scale boost + glow increase
+- Active: scale(0.97) with fast transition (100ms)
+- Never use square/slightly-rounded buttons — always full pill
 
-| Bad Practice | Why It Looks Cheap | Do Instead |
-|---|---|---|
-| `background: #f0f0f0` flat gray | Lifeless, no depth | Dark gradient with multiple stops |
-| `border-radius: 5px` | Dated, generic | 20-28px for cards, pill for buttons |
-| `border: 1px solid #ccc` | Harsh, visible line | `rgba(255,255,255,0.08)` subtle glass border |
-| `box-shadow: 0 2px 5px rgba(0,0,0,0.1)` | Weak, no depth | Layered dark shadows + inner glow |
-| No backdrop-filter | Flat, no glass effect | Always use blur(20px)+saturate for panels |
-| `font-family: Arial` | Generic, boring | System font stack with SF Pro |
-| Equal padding everywhere | No rhythm | Generous varied spacing (24-48px) |
-| No hover animations | Static, dead | translateY + scale + glow on hover |
-| Pure white text on dark | Harsh, eye strain | Use #F5F5F7 or #E5E5EA instead |
-| `transition: all 0.3s ease` | Sluggish, default | Use custom bezier curves, 150-250ms |
-| Icons as emoji | Amateur | Use SVG icons (Lucide/Heroicons) or styled divs |
+---
 
-## Output Format
-
-When generating UI code, ALWAYS output in this structure:
-
-### 1. Design Specification (brief)
-```
-Theme: [Dark Glass / Light Glass / Dark Solid / Custom]
-Accent: [color name + hex]
-Layout: [single page / multi-section / dashboard / ...]
-Framework: [HTML/CSS | React | Vue]
-Special Effects: [gradient blobs / noise texture / animated borders / ...]
-```
-
-### 2. Full Working Code
-- Self-contained, runnable
-- CSS variables at top (full token set)
-- Dark gradient background with depth layers (blobs)
-- All cards use glassmorphism
-- Buttons are pill-shaped with glow
-- Smooth bouncy transitions on interactions
-- Mobile-first responsive
-- Proper semantic HTML + accessibility
-
-### 3. Quality Checklist (self-verify)
-- [ ] Background is a gradient, not flat solid
-- [ ] Cards have backdrop-filter blur
-- [ ] Border-radius >= 20px on major cards
-- [ ] Buttons are pill-shaped (border-radius: 50px)
-- [ ] At least one accent glow effect present
-- [ ] Typography has 3+ distinct size levels
-- [ ] Hover states include transform (translateY/scale)
-- [ ] Inner glow (inset shadow) on glass surfaces
-- [ ] No harsh borders (all rgba with low opacity)
-- [ ] Text uses off-white (#F5F5F7), not pure white
-- [ ] Mobile responsive (375px tested)
-- [ ] At least one floating blob/gradient for depth
-
-## Light Theme Alternative
-
-If user explicitly asks for light theme, use this adjusted approach:
+### 6. Color Tokens
 
 ```css
 :root {
-  --bg-base: #F2F2F7;
-  --bg-gradient: linear-gradient(135deg, #F2F2F7 0%, #E5E5EA 50%, #F2F2F7 100%);
-  --surface-glass: rgba(255, 255, 255, 0.72);
-  --surface-glass-hover: rgba(255, 255, 255, 0.85);
-  --surface-border: rgba(0, 0, 0, 0.04);
-  --surface-border-hover: rgba(0, 0, 0, 0.08);
-  --surface-inner-glow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  --text-primary: #1D1D1F;
-  --text-secondary: #6E6E73;
-  --text-muted: #AEAEB2;
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+  /* Dark theme (default) */
+  --bg: #0a0a0f;
+  --text-primary: #f0f0f3;
+  --text-secondary: #8b8b99;
+  --text-muted: #4a4a58;
+  --accent: #6366f1;        /* indigo — change per project */
+  --accent-rgb: 99, 102, 241;
+  --accent-glow: rgba(99, 102, 241, 0.3);
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-border: rgba(255, 255, 255, 0.06);
+  --text-rgb: 240, 240, 243;
+}
+
+/* Light theme */
+:root.light {
+  --bg: #f8f6f4;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6b6b80;
+  --text-muted: #a0a0b0;
+  --accent: #6366f1;
+  --accent-rgb: 99, 102, 241;
+  --surface: rgba(255, 255, 255, 0.6);
+  --surface-border: rgba(255, 255, 255, 0.7);
+  --text-rgb: 26, 26, 46;
 }
 ```
 
-Light theme blobs use pastel colors at 0.3-0.4 opacity.
+**Accent color options (pick ONE per project):**
+- Indigo: `#6366f1` — tech, AI, SaaS
+- Blue: `#3b82f6` — trust, corporate, finance
+- Violet: `#8b5cf6` — creative, premium
+- Rose: `#f43f5e` — bold, energy, social
+- Amber: `#f59e0b` — warm, crypto, fintech
+- Emerald: `#10b981` — health, nature, growth
+- Cyan: `#06b6d4` — fresh, modern, travel
 
-## Framework-Specific Templates
+---
 
-### HTML/CSS/JS (Default)
-Read `references/template-html.md` for the starter template.
+### 7. Micro-interactions & Motion
 
-### React (with CSS Modules or styled-components)
-Read `references/template-react.md` for the starter template.
+```css
+/* Transition presets */
+--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+--ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+--ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
-### Vue 3 (with scoped styles)
-Read `references/template-vue.md` for the starter template.
+/* Card hover — float up */
+.card { transition: all 0.4s var(--ease-out-expo); }
+.card:hover { transform: translateY(-4px); }
 
-## Quick Invocation Examples
+/* Button hover — bounce scale */
+.btn { transition: all 0.25s var(--ease-bounce); }
+.btn:hover { transform: translateY(-2px) scale(1.03); }
 
-User says: "帮我做一个登录页面"
-→ Dark Glass theme, centered floating glass card, gradient blobs behind, input fields with glass bg, pill-shaped submit button with glow
+/* Subtle entrance animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  animation: fadeUp 0.6s var(--ease-out-expo) forwards;
+}
+```
 
-User says: "做一个深色风格的仪表盘"
-→ Dark Glass theme, glass sidebar + main grid, data cards with subtle inner glow, accent colored chart elements
+**Rules:**
+- Cards: 0.4s ease-out-expo, translateY(-4px) on hover
+- Buttons: 0.25s bounce, translateY(-2px) + scale(1.03)
+- Inputs: 0.2s smooth, border-color change + subtle glow
+- NEVER use `transition: all 0.3s ease` — this is the AI tell
+- Active/pressed: scale(0.97), duration 0.1s
+- Page load: stagger fadeUp animation (0.1s delay per element)
 
-User says: "做一个产品展示落地页"
-→ Dark Glass theme, hero with large text + floating device mockup, feature cards in glass grid, gradient CTA section
+---
 
-User says: "做一个卡片选择页面"
-→ Dark Glass theme, glass cards with hover lift + glow border, selected state with accent border glow, pill-shaped confirm button
+### 8. Visual Depth Elements
+
+Add these to create the "designed" feel:
+
+```css
+/* Floating gradient orb (decorative) */
+.orb {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Noise texture overlay (subtle) */
+.noise-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.015;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Grid lines (optional, for tech/SaaS) */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+```
+
+**Rules:**
+- ALWAYS add at least 1 decorative gradient orb
+- Noise overlay: optional but adds texture (keep opacity 0.01-0.02)
+- Grid bg: great for tech/dashboard products
+- Orbs should be positioned at corners/edges, not center
+- Use `filter: blur(60-100px)` — must be very soft
+
+---
+
+### 9. Responsive Rules
+
+```css
+/* Breakpoints */
+@media (max-width: 1024px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .bento-item-hero { grid-column: span 2; grid-row: span 1; }
+}
+
+@media (max-width: 640px) {
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-item-wide, .bento-item-hero { grid-column: span 1; }
+  .card { padding: 24px; border-radius: 20px; }
+  .hero-title { font-size: 2.2rem; }
+  body { padding: 0 20px; }
+}
+```
+
+---
+
+## ANTI-PATTERNS — NEVER DO THESE
+
+| Doing This | Makes It Look Like | Do This Instead |
+|---|---|---|
+| `background: #1a1a1a` flat | 2019 dark mode | Layered radial-gradients |
+| `border-radius: 8px` on cards | Bootstrap template | 24-32px for cards |
+| `border: 1px solid #333` | Cheap, harsh lines | rgba(255,255,255, 0.06) |
+| Same font-size everywhere | No hierarchy, boring | 3:1 ratio heading:body |
+| `margin: 20px` everywhere | No rhythm | Use spacing scale tokens |
+| No hover animation | Static, dead | translateY + enhanced shadow |
+| Content touching edges | Cramped, amateur | 48-80px page padding |
+| `box-shadow: 0 2px 4px` | Weak, flat | Deep layered shadows |
+| Text max-width: 100% | Unreadable lines | max-width: 540-600px |
+| `transition: 0.3s ease` | AI-generated tell | Custom bezier curves |
+| Emoji as icons 🎯 | Unprofessional | CSS shapes or SVG |
+| `color: #fff` on dark bg | Harsh, eye strain | Use #f0f0f3 or #e8e8ec |
+
+---
+
+## OUTPUT FORMAT
+
+When generating UI code, ALWAYS output:
+
+### 1. Design Brief
+```
+Mood: [Calm Tech / Warm Creative / Fresh / Premium / Neutral]
+Theme: [Dark / Light / Mixed]
+Accent: [color name + hex]
+Layout: [Hero full / Bento grid / Split / Cards]
+Special: [orbs / noise / grid-bg / animated borders]
+```
+
+### 2. Full Working Code
+- Self-contained HTML file (or React/Vue components)
+- CSS variables at top
+- Diffused gradient background (2-4 layers)
+- At least 1 decorative orb/gradient element
+- Glass cards with top-edge highlight
+- Pill buttons with glow shadows
+- Cinematic typography (large headings, light body)
+- Hover animations on all interactive elements
+- Mobile responsive
+- Semantic HTML
+
+### 3. Self-Verification
+- [ ] Background uses layered gradients (not flat solid)
+- [ ] At least 1 floating orb/gradient decoration
+- [ ] Typography ratio >= 3:1 (heading vs body)
+- [ ] Card border-radius >= 20px
+- [ ] Buttons are pill-shaped (border-radius: 50px)
+- [ ] Hover states include transform (translateY or scale)
+- [ ] Page has generous whitespace (60%+ empty)
+- [ ] Text uses off-white (not pure #fff on dark)
+- [ ] Custom easing curves (not default ease)
+- [ ] Cards have top-edge highlight effect
+- [ ] Mobile breakpoint handled
+- [ ] Content doesn't touch screen edges
+
+---
+
+## QUICK REFERENCE: WHEN USER ASKS FOR...
+
+| Request | Approach |
+|---|---|
+| Landing page | Hero (80vh, huge text) + Bento features + CTA section |
+| Dashboard | Dark bento grid, stat cards with subtle glow, sidebar |
+| Login/signup | Centered glass card on gradient bg, pill inputs + CTA |
+| Card selection | Grid of glass cards, selected state = accent border glow |
+| Product page | Split layout (text left, visual right), flowing sections |
+| Settings/form | Clean light theme, subtle cards, grouped inputs |
+| Portfolio | Full-bleed images + overlaid text, minimal chrome |
