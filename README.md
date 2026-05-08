@@ -89,7 +89,7 @@ mliang-ui-design-skill/
 
 ## 作者
 
-**MLiang** (丁觉昇)
+**MLiang**
 
 - GitHub: [@MLiang0920](https://github.com/MLiang0920)
 - Email: 2980125919@qq.com
