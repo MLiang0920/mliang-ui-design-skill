@@ -1,12 +1,14 @@
 # MLiang UI Design Skill
 
+[中文文档](./README_CN.md)
+
 > Make AI agents write truly beautiful UI code.
 
 ## What is this?
 
-A [WorkBuddy](https://www.codebuddy.cn/) Skill that solves the common problem of AI-generated UI looking ugly — bad color combinations, inconsistent spacing, and lack of design sense.
+A universal UI design prompt/rule set for **any AI coding agent** (Cursor, Windsurf, Copilot, Claude, WorkBuddy, Cline, etc.) that solves the common problem of AI-generated UI looking ugly — bad color combinations, inconsistent spacing, and lack of design sense.
 
-Once installed, the agent automatically enforces:
+Once loaded into your agent's context, it automatically enforces:
 - Validated harmonious color palettes (14 pre-built palettes)
 - Strict spacing rhythm system (4px base grid)
 - Modular typography scale (1.25 ratio)
@@ -33,9 +35,26 @@ Once installed, the agent automatically enforces:
 
 ## Installation
 
-### Option 1: Direct Copy (Recommended)
+### For Any AI Agent (Universal)
 
-Copy the folder to your WorkBuddy Skills directory:
+Copy the content of `SKILL.md` into your agent's system prompt, custom instructions, or rules file:
+
+- **Cursor**: Paste into `.cursorrules` or project rules
+- **Windsurf**: Paste into `.windsurfrules`
+- **GitHub Copilot**: Paste into `.github/copilot-instructions.md`
+- **Claude Projects**: Add as project knowledge
+- **Cline / Roo Code**: Add as custom instructions
+- **WorkBuddy**: Copy folder to `~/.workbuddy/skills/web-ui-codegen/`
+
+### Quick Start
+
+```bash
+git clone https://github.com/MLiang0920/mliang-ui-design-skill.git
+```
+
+Then copy `SKILL.md` content into your agent's instruction file, or use the full folder if your agent supports skill/plugin systems.
+
+### WorkBuddy-Specific Installation
 
 ```bash
 # User-level (available across all projects)
@@ -45,20 +64,14 @@ cp -r mliang-ui-design-skill/ ~/.workbuddy/skills/web-ui-codegen/
 cp -r mliang-ui-design-skill/ .workbuddy/skills/web-ui-codegen/
 ```
 
-### Option 2: Clone Repository
-
-```bash
-git clone https://github.com/MLiang0920/mliang-ui-design-skill.git
-cp -r mliang-ui-design-skill/ ~/.workbuddy/skills/web-ui-codegen/
-```
-
 ## File Structure
 
 ```
 mliang-ui-design-skill/
 ├── SKILL.md                    # Core instructions (color rules, layout rules, anti-patterns)
-├── README.md                   # This file
+├── README.md                   # This file (English)
 ├── README_CN.md                # 中文文档
+├── LICENSE                     # MIT License
 └── references/
     ├── template-html.md        # HTML/CSS/JS starter template
     ├── template-react.md       # React + CSS Modules component template
@@ -68,9 +81,12 @@ mliang-ui-design-skill/
 
 ## Usage
 
-No extra steps needed after installation. The skill activates automatically when you ask the AI to do Web UI tasks.
+Once loaded into your AI agent's context, no extra steps are needed. The agent will automatically follow the design rules when generating UI code.
 
-You can also type `/web-ui-codegen` in the conversation to manually activate it.
+Key files to feed your agent:
+1. **`SKILL.md`** — The core rules (required)
+2. **`references/color-palettes.md`** — Pre-built palettes (recommended)
+3. **`references/template-*.md`** — Framework-specific templates (use the one matching your stack)
 
 ## Design Philosophy
 
@@ -82,11 +98,18 @@ Follows **Apple-style minimalism** by default:
 - Smooth micro-interactions (150-300ms)
 - Clear typographic hierarchy
 
-## Works with ui-ux-pro-max
+## Compatibility
 
-This skill pairs with the `ui-ux-pro-max` skill:
-- `ui-ux-pro-max`: Handles design decision queries (which style, colors, fonts to use)
-- `web-ui-codegen`: Ensures the generated code actually looks beautiful
+| Agent | How to Use |
+|---|---|
+| Cursor | `.cursorrules` or Rules settings |
+| Windsurf | `.windsurfrules` |
+| GitHub Copilot | `.github/copilot-instructions.md` |
+| Claude (Projects) | Add as project knowledge |
+| ChatGPT | Paste into custom instructions |
+| Cline / Roo Code | Custom instructions |
+| WorkBuddy | Skills folder (`~/.workbuddy/skills/`) |
+| Any other agent | Paste `SKILL.md` into system prompt |
 
 ## Author
 

@@ -1,12 +1,14 @@
 # MLiang UI Design Skill
 
+[English](./README.md)
+
 > 让 AI Agent 写出真正好看的 UI 代码
 
 ## 这是什么？
 
-这是一个 [WorkBuddy](https://www.codebuddy.cn/) Skill，解决 AI Agent 写 UI 代码时**配色丑、布局乱、缺乏设计感**的通病。
+一套适用于**所有 AI 编程助手**（Cursor、Windsurf、Copilot、Claude、WorkBuddy、Cline 等）的 UI 设计规则集，解决 AI 生成 UI 代码时**配色丑、布局乱、缺乏设计感**的通病。
 
-安装后，Agent 在生成 Web UI 代码时会自动遵循：
+加载到你的 Agent 上下文后，它会自动遵循：
 - 经过验证的和谐配色方案（14 套预置 palette）
 - 严格的间距韵律系统（4px 基准网格）
 - 模块化字体比例（1.25 倍递进）
@@ -33,9 +35,27 @@
 
 ## 安装方法
 
-### 方法一：直接复制（推荐）
+### 通用方法（适用于所有 AI Agent）
 
-将整个文件夹复制到你的 WorkBuddy Skills 目录：
+将 `SKILL.md` 的内容复制到你的 Agent 的指令/规则文件中：
+
+- **Cursor**：粘贴到 `.cursorrules` 或项目规则中
+- **Windsurf**：粘贴到 `.windsurfrules`
+- **GitHub Copilot**：粘贴到 `.github/copilot-instructions.md`
+- **Claude Projects**：作为项目知识添加
+- **ChatGPT**：粘贴到自定义指令中
+- **Cline / Roo Code**：添加为自定义指令
+- **WorkBuddy**：复制文件夹到 `~/.workbuddy/skills/web-ui-codegen/`
+
+### 快速开始
+
+```bash
+git clone https://github.com/MLiang0920/mliang-ui-design-skill.git
+```
+
+然后将 `SKILL.md` 内容粘贴到你的 Agent 指令文件中，或者如果你的 Agent 支持 Skill/插件系统，直接使用整个文件夹。
+
+### WorkBuddy 专用安装
 
 ```bash
 # 用户级（所有项目可用）
@@ -45,13 +65,6 @@ cp -r mliang-ui-design-skill/ ~/.workbuddy/skills/web-ui-codegen/
 cp -r mliang-ui-design-skill/ .workbuddy/skills/web-ui-codegen/
 ```
 
-### 方法二：克隆仓库
-
-```bash
-git clone https://github.com/MLiang0920/mliang-ui-design-skill.git
-cp -r mliang-ui-design-skill/ ~/.workbuddy/skills/web-ui-codegen/
-```
-
 ## 文件结构
 
 ```
@@ -59,6 +72,7 @@ mliang-ui-design-skill/
 ├── SKILL.md                    # 核心指令（配色规则、布局规则、反模式清单）
 ├── README.md                   # 英文文档
 ├── README_CN.md                # 本文件（中文文档）
+├── LICENSE                     # MIT 许可证
 └── references/
     ├── template-html.md        # HTML/CSS/JS 完整启动模板
     ├── template-react.md       # React + CSS Modules 组件模板
@@ -68,9 +82,12 @@ mliang-ui-design-skill/
 
 ## 使用方式
 
-安装后无需额外操作。当你让 AI 做 Web UI 相关任务时，Skill 会自动生效。
+加载到 AI Agent 上下文后无需额外操作，Agent 生成 UI 代码时会自动遵循设计规则。
 
-你也可以在对话中输入 `/web-ui-codegen` 手动激活。
+需要喂给 Agent 的关键文件：
+1. **`SKILL.md`** — 核心规则（必须）
+2. **`references/color-palettes.md`** — 预置调色板（推荐）
+3. **`references/template-*.md`** — 框架模板（选择你使用的技术栈）
 
 ## 设计哲学
 
@@ -82,11 +99,18 @@ mliang-ui-design-skill/
 - 流畅的微交互（150-300ms）
 - 清晰的字体层级
 
-## 适配 ui-ux-pro-max
+## 兼容性
 
-本 Skill 可与 `ui-ux-pro-max` Skill 配合使用：
-- `ui-ux-pro-max`：负责设计决策查询（选什么风格、配色、字体）
-- `web-ui-codegen`：负责代码输出质量（确保写出来的代码好看）
+| Agent | 使用方式 |
+|---|---|
+| Cursor | `.cursorrules` 或 Rules 设置 |
+| Windsurf | `.windsurfrules` |
+| GitHub Copilot | `.github/copilot-instructions.md` |
+| Claude (Projects) | 作为项目知识添加 |
+| ChatGPT | 粘贴到自定义指令 |
+| Cline / Roo Code | 自定义指令 |
+| WorkBuddy | Skills 文件夹（`~/.workbuddy/skills/`） |
+| 其他任何 Agent | 将 `SKILL.md` 粘贴到系统提示词中 |
 
 ## 作者
 
